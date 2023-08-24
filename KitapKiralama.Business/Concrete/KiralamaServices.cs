@@ -35,10 +35,7 @@ namespace KitapKiralama.Business.Concrete
 
         public async Task<Kiralama> GetAsync(Expression<Func<Kiralama, bool>> Filter, params string[] IncludeParameters)
         {
-            var kiralama = await _unitOfWork.KiralamaRepository.GetAsync(Filter, IncludeParameters);
-
-            kiralama.Kitap = await _unitOfWork.KitapRepository.GetAsync(k=>k.Id == kiralama.KitapId);
-            return kiralama;
+            return await _unitOfWork.KiralamaRepository.GetAsync(Filter, IncludeParameters);
         }
 
         public async Task RemoveAsync(Kiralama entity)

@@ -5,6 +5,8 @@ using KitapKiralama.DataAccess.Concrete.EntityFramework.Context;
 using KitapKiralama.DataAccess.Concrete.EntityFramework.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using KitapKiralama.Entity.Poco;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +15,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<IKitapTuruRepository, EfKitapTuruRepository>();
@@ -23,7 +25,7 @@ builder.Services.AddScoped<IKitapTuruServices,KitapTuruServices >();
 builder.Services.AddScoped<IKitapServices,KitapServices >();
 builder.Services.AddScoped<IKiralamaServices,KiralamaServices >();
 builder.Services.AddScoped<IUnitOfWork, EfUnitOfWork>();
-
+builder.Services.AddScoped<IEmailSender,EmailSender>();
 
 var app = builder.Build();
 

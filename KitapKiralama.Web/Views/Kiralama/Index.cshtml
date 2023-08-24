@@ -43,10 +43,8 @@
                     <td>@kiralama.Id</td>
                     <td>@kiralama.OgrenciId</td>
                     <td>@kiralama.KitapId</td>
-                   @*  <td>@kiralama.Kitap.KitapAdi</td> *@
-                   <td>
-                       <a asp-controller="Kiralama" asp-action="GetByKitapId" asp-route-id="@kiralama.Id" type="button" class="btn btn-success" style="width:50%" height: 100%">Kitap Adı Getir</a>
-                   </td>
+                    <td>@kiralama.Kitap.KitapAdi</td>
+                   
                     <td>
                         <a asp-controller="Kiralama" asp-action="EkleGuncelle" asp-route-id="@kiralama.Id" type="button" class="btn btn-success" style="width:%50" height:%100">Güncelle</a>
                     </td>

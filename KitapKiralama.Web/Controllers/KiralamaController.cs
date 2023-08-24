@@ -21,9 +21,7 @@ namespace KitapKiralama.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            IEnumerable<Kiralama> objKiralamaList = await _kiralamaServices.GetAllAsync();
-
-            var deneme = objKiralamaList.ToList();
+            IEnumerable<Kiralama> objKiralamaList = await _kiralamaServices.GetAllAsync(null,"Kitap");
 
             return View(objKiralamaList.ToList());
         }
@@ -54,13 +52,6 @@ namespace KitapKiralama.Web.Controllers
                 }
                 return View(kiralamaVt);
             }
-        }
-
-        public async Task<string> GetByKitapId(int? kitapId)
-        {
-            Kitap kitap = await _unitOfWork.KitapRepository.GetAsync(k => k.Id == kitapId);
-
-            return kitap.KitapAdi;
         }
 
         [HttpPost]

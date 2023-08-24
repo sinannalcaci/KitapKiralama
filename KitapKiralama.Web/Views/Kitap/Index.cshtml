@@ -39,8 +39,8 @@
          <th>
             Kitap Türü
         </th>
-@* @if (User.IsInRole(UserRoles.Role_Admin))
- { *@
+ @if (User.IsInRole(UserRoles.Role_Admin))
+ { 
 
         <th>
 
@@ -48,35 +48,35 @@
         <th>
 
         </th>
- @* } *@
+ } 
     </tr>
     </thead>
     <tbody>
         @foreach (var kitap in Model)
         {
             <tr>
-                    <td align="center" valign="middle"> <img class="border border-primary img-thumbnail" src="@kitap.ResimUrl" style=" max-width:50%; max-height:50%;" /></td>
+                <td align="center" valign="middle"> <img class="border border-primary img-thumbnail" src="@kitap.ResimUrl" style=" max-width:40%; max-height:40%;" /></td>
                 <td>@kitap.Id</td>
                 <td>@kitap.KitapAdi</td>
                 <td>@kitap.Tanim</td>
                 <td>@kitap.Yazar</td>
                 <td>@kitap.Fiyat</td>
-                <td>@kitap.KitapTuru.Ad</td>
-                   @*  @if (User.IsInRole(UserRoles.Role_Admin))
-                    { *@
+                <td>@kitap.KitapTuru.Id</td>
+                    @if (User.IsInRole(UserRoles.Role_Admin))
+                    {
                 <td>
                     <a asp-controller="Kitap" asp-action="EkleGuncelle" asp-route-id="@kitap.Id" type= "button" class="btn btn-success" style="width:%100"height:%100">Güncelle</a>
                 </td>
                 <td>
                     <a asp-controller="Kitap" asp-action="Sil" asp-route-id="@kitap.Id" type="button" class="btn btn-danger" style="width:%100"height:%100">Sil</a>
                 </td>
-                    @* } *@
+                    } 
             </tr>
         }
     </tbody>
 </table>
-@* @if (User.IsInRole(UserRoles.Role_Admin))
- { *@
+@if (User.IsInRole(UserRoles.Role_Admin))
+ { 
 
 <div class="row pt-3 pb-2">
     <div>
@@ -86,5 +86,5 @@
     </div>
 </div>
 
- @* } *@
+  }
 </div>

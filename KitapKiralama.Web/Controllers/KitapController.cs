@@ -19,15 +19,15 @@ namespace KitapKiralama.Web.Controllers
 
         }
 
-        //[Authorize(Roles = UserRoles.Role_Admin)]
+        [Authorize(Roles = "Admin,Ogrenci")]
         public async Task<IActionResult> Index()
         {
-            IEnumerable<Kitap> objKitapList = await _unitOfWork.KitapRepository.GetAllAsync();
+            IEnumerable<Kitap> objKitapList = await _unitOfWork.KitapRepository.GetAllAsync(null,"KitapTuru");
             return View(objKitapList);
         }
 
 
-        //[Authorize(Roles = UserRoles.Role_Admin)]
+        [Authorize(Roles = UserRoles.Role_Admin)]
         public async Task<IActionResult> EkleGuncelle(int? id)
         {
 
@@ -45,7 +45,7 @@ namespace KitapKiralama.Web.Controllers
             }
             else
             {
-                var kitapVt = _unitOfWork.KitapRepository.GetAsync(u => u.Id == id); //Expression<Func<T, bool>> filtre
+                var kitapVt = await _unitOfWork.KitapRepository.GetAsync(u => u.Id == id); //Expression<Func<T, bool>> filtre
                 if (kitapVt == null)
                 {
                     return NotFound();
@@ -53,12 +53,10 @@ namespace KitapKiralama.Web.Controllers
                 return View(kitapVt);
             }
 
-
-
         }
 
         [HttpPost]
-        //[Authorize(Roles = UserRoles.Role_Admin)]
+        [Authorize(Roles = UserRoles.Role_Admin)]
         public async Task<IActionResult> EkleGuncelle(Kitap kitap, IFormFile? file)
         {
             if (ModelState.IsValid)
@@ -97,10 +95,10 @@ namespace KitapKiralama.Web.Controllers
             return View();
         }
 
-       
+
 
         //GET ACTİON
-        //[Authorize(Roles = UserRoles.Role_Admin)]
+        [Authorize(Roles = UserRoles.Role_Admin)]
         public async Task<IActionResult> Sil(int? id)
         {
             if (id == null || id == 0)
@@ -117,7 +115,7 @@ namespace KitapKiralama.Web.Controllers
 
 
         [HttpPost, ActionName("Sil")]
-        //[Authorize(Roles = UserRoles.Role_Admin)]
+        [Authorize(Roles = UserRoles.Role_Admin)]
         public async Task<IActionResult> SilPOST(int? id)
         {
             var kitap = await _unitOfWork.KitapRepository.GetAsync(u => u.Id == id);

@@ -17,6 +17,6 @@ namespace KitapKiralama.Entity.Poco
         public int KitapId { get; set; }
         [ForeignKey("KitapId")]
         [ValidateNever]
-        public Kitap? Kitap { get; set; }
+        public Kitap Kitap { get; set; }
     }
 }

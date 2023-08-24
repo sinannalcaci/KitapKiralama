@@ -1,9 +1,11 @@
 ﻿using KitapKiralama.DataAccess.Abstract.DataManagement;
 using KitapKiralama.Entity.Poco;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KitapKiralama.Web.Controllers
 {
+    [Authorize(Roles = UserRoles.Role_Admin)]
     public class KitapTuruController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
